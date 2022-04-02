@@ -1,26 +1,24 @@
 # drcctprof_tutorial
 
-This is a framework used for A hands-on lab: developing the first DrCCTProf client tool on ARM in [DrCCTProf Tutorial](https://www.xperflab.org/drcctprof/tutorial).
+This repository includes all the necessary files for the hands-on lab for [DrCCTProf tutorial at CGO'22](https://www.xperflab.org/drcctprof/tutorial).
 
-## Requirement
+## Instructions on the coding assignment
 
-Try to implement a DrCCTProf client to count each **instruction**<sup>*</sup> with unique call stacks.
+Try to implement a DrCCTProf client to count **instruction instances**<sup>*</sup> within unique calling contexts.
 
 > `*` `Instructions of the same PC (program counter) may appear in different call paths.`
 
 
-You just need to finish the function of [void InsCount(int32_t opaqueHandle)](https://github.com/Xuhpclab/drcctprof_tutorial/blob/main/src/client.cpp#L42-L55)
+You just need to complete the function [void InsCount(int32_t opaqueHandle)](https://github.com/Xuhpclab/drcctprof_tutorial/blob/main/src/client.cpp#L42-L55)
 :
 
-1. get the current context handle
+1. Get the current context handle.
    Tip: use API 
    ```c
     context_handle_t drcctlib_get_context_handle(void *drcontex, int32_t opaqueHandle)
    ```
-2. get the executed times of the current context handle
-    Tip: use *ctxt_hndl_exec_num_array*  to get and store every context handle's executed times
-
-3. add 1 for the executed times and store it in the array
+2. Increment the instruction execution frequency with the current context handle
+    Tip: use *ctxt_hndl_exec_num_array*  to get and store the execution frequency of each context handle.
 
 ## Build
 
@@ -36,14 +34,14 @@ $ ./build.sh
 
 ## Run
 
-After you finish the implementation, run the following commands to rebuild your source code and run the tool to profile the test application:
+Once you complete the implementation, run the following command to build your source code and run the tool to profile the test application:
 
 ```console
 $ ./run.sh
 ```
 
-The process will generate two profiles, one is a text file, and one is a .drcctprof file. You can directly open the .drcctprof file in VSCode if you have installed our [Viewer extension](https://marketplace.visualstudio.com/items?itemName=xuhpclib-easyview.easyview).
+This will generate two output files: one is a text file and the other is a .drcctprof file. You can directly open the text file or open .drcctprof file in VSCode with [EasyView](https://marketplace.visualstudio.com/items?itemName=xuhpclib-easyview.easyview) installed.
 
-### *Expected screenshot result*
+### *Expected result in EasyView*
 
 > <div align=center><img src="screenshot.png"/> </div>
